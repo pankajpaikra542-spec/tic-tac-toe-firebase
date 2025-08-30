@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic-Tac-Toe - Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Tic-Tac-Toe</h1>
+            <div class="room-info">
+                Room: <span id="roomCodeDisplay"></span>
+                <span id="playerMark"></span>
+            </div>
+        </header>
+        
+        <div id="statusMessage" class="status-message"></div>
+        
+        <div class="game-board">
+            <div class="board">
+                <div class="cell" data-pos="0"></div>
+                <div class="cell" data-pos="1"></div>
+                <div class="cell" data-pos="2"></div>
+                <div class="cell" data-pos="3"></div>
+                <div class="cell" data-pos="4"></div>
+                <div class="cell" data-pos="5"></div>
+                <div class="cell" data-pos="6"></div>
+                <div class="cell" data-pos="7"></div>
+                <div class="cell" data-pos="8"></div>
+            </div>
+        </div>
+        
+        <div id="resultMessage" class="result-message hidden">
+            <h2 id="winnerText"></h2>
+            <button id="rematchBtn" class="btn btn-primary">Play Again</button>
+        </div>
+        
+        <div id="waitingMessage" class="waiting-message">
+            <p>Waiting for another player to join...</p>
+        </div>
+    </div>
+    
+    <script type="module" src="firebase-config.js"></script>
+    <script type="module" src="game.js"></script>
+</body>
+</html>

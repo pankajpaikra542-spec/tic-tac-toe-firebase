@@ -1,0 +1,35 @@
+{
+  "rules": {
+    "rooms": {
+      "$roomCode": {
+        ".read": "auth != null",
+        ".write": "auth != null && (
+          (data.child('host').val() === auth.uid && !newData.exists()) ||
+          (data.child('host').val() === auth.uid) ||
+          (data.child('guest').val() === auth.uid)
+        )",
+        ".validate": "
+          newData.hasChildren(['host', 'guest', 'board', 'turn', 'status', 'winner', 'createdAt']) &&
+          newData.child('board').isArray() &&
+          newData.child('board').val().length === 9 &&
+          newData.child('turn').val().matches(/^(X|O)$/) &&
+          newData.child('status').val().matches(/^(waiting|playing|finished|abandoned)$/) &&
+          (newData.child('winner').val() === null || newData.child('winner').val().matches(/^(X|O|draw)$/)) &&
+          newData.child('createdAt').isNumber()
+        "
+      }
+    },
+    "presence": {
+      "$uid": {
+        ".read": "auth != null && auth.uid === $uid",
+        ".write": "auth != null && auth.uid === $uid",
+        ".validate": "
+          newData.hasChildren(['room', 'connected', 'lastSeen']) &&
+          newData.child('room').val().length === 6 &&
+          newData.child('connected').isBoolean() &&
+          newData.child('lastSeen').isNumber()
+        "
+      }
+    }
+  }
+}
